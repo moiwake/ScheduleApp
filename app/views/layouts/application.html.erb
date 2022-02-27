@@ -11,6 +11,14 @@
   </head>
 
   <body>
+    <header>スケジュールアプリ</header>
     <%= yield %>
+    
+    
+    <footer>
+      今日の日付：<%= Date.current.strftime("%Y年 %m月 %d日")%><br>
+      <% @count = User.count %>
+      スケジュール合計：<%= @count %>
+    </footer>
   </body>
 </html>
