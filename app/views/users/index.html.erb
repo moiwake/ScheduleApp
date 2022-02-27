@@ -1,0 +1,55 @@
+<h3>スケジュール一覧</h3>
+
+<% if flash[:notice] %>
+  <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+
+<table>
+  <thead>
+    <tr></tr>
+      <th>ID</th>
+      <th>タイトル</th>
+      <th>開始日時</th>
+      <th>終了日時</th>
+      <th>終日</th>
+      <th>スケジュール更新日時</th>
+      <th>確認</th>
+      <th>編集</th>
+      <th>削除</th>
+    <tr></tr>
+  </thead>
+  
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.title %></td>
+        <td>
+          <% date = user.start_date %>
+          <% unless date == nil %>
+            <%= date.to_s(:datetime_jp) %>
+          <% end %>
+        </td>
+        <td>
+          <% date = user.end_date %>
+          <% unless date == nil %>
+            <%= date.to_s(:datetime_jp) %>
+          <% end %>
+        </td>
+        <td>
+          <% if user.all_day %>
+            ○
+          <% end %>
+        </td>
+        <td><%= user.updated_at.to_s(:datetime_jp) %></td>
+        <td><%= link_to "確認", user_path(user) %></td>
+        <td><%= link_to "編集", edit_user_path(user) %></td>
+        <td><%= button_to "削除", user_path(user), method: :delete ,class: "index-button"%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "◇ スケジュール新規登録", :new_user %>
+
+

@@ -1,0 +1,43 @@
+<h3>スケジュール詳細</h3>
+
+<table>
+    <tr>
+      <th>タイトル</th>
+      <td><%= @user.title %></td>
+    </tr>
+    <tr>
+      <th>開始日時</th>
+      <td>
+        <% date = @user.start_date %>
+        <% unless date == nil %>
+          <%= date.to_s(:datetime_jp) %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th>終了日時</th>
+      <td>
+        <% date = @user.end_date %>
+        <% unless date == nil %>
+          <%= date.to_s(:datetime_jp) %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th>終日</th>
+      <td><% if @user.all_day %>
+          ○
+          <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th>スケジュールメモ</th>
+      <td><%= @user.memo %></td>
+    </tr>
+</table>
+
+<%= link_to "◇ スケジュール一覧に戻る", :users %>
+<%= link_to "◇ スケジュールを編集する", edit_user_path(@user.id) %>
+<%= button_to "◇ スケジュールを削除", user_path(@user.id), method: :delete ,class: "show-button"%>
+
+
